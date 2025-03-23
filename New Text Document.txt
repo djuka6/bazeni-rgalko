@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Čisti Bazeni - Profesionalno održavanje bazena</title>
+    <style>
+        :root {
+            --dark-blue: #191944;
+            --light-blue: #387dbf;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--white);
+            color: var(--dark-blue);
+            line-height: 1.6;
+        }
+        
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 50px;
+            width: auto;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-blue);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--light-blue);
+        }
+        
+        .hero {
+            height: 80vh;
+            background: linear-gradient(to right, rgba(25, 25, 68, 0.8), rgba(56, 125, 191, 0.8)), url('/api/placeholder/1200/800') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            margin-top: 70px;
+        }
+        
+        .hero-content {
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--light-blue);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        
+        .btn:hover {
+            background-color: var(--dark-blue);
+        }
+        
+        section {
+            padding: 5rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark-blue);
+        }
+        
+        .section-title p {
+            color: var(--light-blue);
+            font-size: 1.2rem;
+        }
+        
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+            transition: transform 0.3s;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .service-card h3 {
+            color: var(--dark-blue);
+            margin: 1rem 0;
+        }
+        
+        .service-icon {
+            color: var(--light-blue);
+            font-size: 3rem;
+        }
+        
+        .bg-light {
+            background-color: #f8f9fa;
+        }
+        
+        .reasons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .reason-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            padding: 2rem;
+        }
+        
+        .reason-card h3 {
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+        }
+        
+        footer {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 3rem 0;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-logo {
+            filter: brightness(0) invert(1);
+            height: 50px;
+            width: auto;
+            margin-bottom: 1rem;
+        }
+        
+        .footer-links h4 {
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--light-blue);
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo-container">
+                    <svg class="logo" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 10 C30 5, 70 5, 80 10 L80 40 C70 45, 30 45, 20 40 Z" fill="#387dbf" />
+                        <path d="M30 15 C40 12, 60 12, 70 15 L70 35 C60 38, 40 38, 30 35 Z" fill="#ffffff" />
+                        <path d="M40 20 C45 18, 55 18, 60 20 L60 30 C55 32, 45 32, 40 30 Z" fill="#387dbf" />
+                        <text x="25" y="48" font-size="10" fill="#191944">ČISTI BAZENI</text>
+                    </svg>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#usluge">Usluge</a></li>
+                    <li><a href="#zasto">Zašto čistiti bazen</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Profesionalno održavanje bazena</h1>
+                <p>Stručnjaci za mehaničko i hemijsko čišćenje bazena. Osigurajte čistoću i bezbednost vašeg bazena uz našu pomoć.</p>
+                <a href="#kontakt" class="btn">Kontaktirajte nas</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="usluge">
+        <div class="container">
+            <div class="section-title">
+                <h2>Naše usluge</h2>
+                <p>Kompletna rešenja za održavanje bazena</p>
+            </div>
+            <div class="services">
+                <div class="service-card">
+                    <div class="service-icon">🧹</div>
+                    <h3>Mehaničko čišćenje</h3>
+                    <p>Profesionalno uklanjanje prljavštine, lišća i drugih nečistoća sa površine i dna bazena. Koristimo najsavremeniju opremu za usisavanje i čišćenje zidova i dna vašeg bazena.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">🧪</div>
+                    <h3>Hemijsko održavanje</h3>
+                    <p>Redovno testiranje i balansiranje hemijskog sastava vode. Stručno doziranje hlora, regulatora pH vrednosti i drugih hemikalija za kristalno čistu vodu bez štetnih mikroorganizama.</p>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon">⚙️</div>
+                    <h3>Servis opreme</h3>
+                    <p>Redovan pregled i održavanje filtera, pumpi i drugih sistema za cirkulaciju vode. Pravovremene popravke i zamena delova za optimalan rad vašeg bazena.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="zasto" class="bg-light">
+        <div class="container">
+            <div class="section-title">
+                <h2>Zašto je važno redovno čistiti bazen?</h2>
+                <p>Čist bazen je zdrav bazen</p>
+            </div>
+            <div class="reasons">
+                <div class="reason-card">
+                    <h3>Zdravlje i bezbednost</h3>
+                    <p>Nečisti bazeni su idealno mesto za razmnožavanje bakterija, algi i drugih mikroorganizama koji mogu izazvati infekcije kože, očiju i respiratornog sistema. Redovnim održavanjem osiguravate bezbedno kupanje za vas i vašu porodicu.</p>
+                </div>
+                <div class="reason-card">
+                    <h3>Produžen životni vek bazena</h3>
+                    <p>Redovno čišćenje i odgovarajući hemijski tretman vode sprečavaju stvaranje naslaga kamenca, koroziju metalnih delova i oštećenja zidova bazena, čime se značajno produžava životni vek vaše investicije.</p>
+                </div>
+                <div class="reason-card">
+                    <h3>Ekonomičnost</h3>
+                    <p>Redovno održavanje bazena je uvek isplativije od rešavanja problema koji nastaju usled zanemarivanja. Popravke oštećenih površina, zamena filtracijskih sistema ili tretiranje većih problema sa algama mogu biti značajno skupi.</p>
+                </div>
+                <div class="reason-card">
+                    <h3>Estetika i uživanje</h3>
+                    <p>Kristalno čista voda i uredan bazen pružaju maksimalno zadovoljstvo prilikom korišćenja. Niko ne želi da pliva u mutnoj vodi ili da vidi prljavštinu na dnu bazena.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontakt">
+        <div class="container">
+            <div class="section-title">
+                <h2>Kontaktirajte nas</h2>
+                <p>Tu smo za sva vaša pitanja</p>
+            </div>
+            <div class="contact-form" style="max-width: 600px; margin: 0 auto;">
+                <form>
+                    <div style="margin-bottom: 1rem;">
+                        <label for="name" style="display: block; margin-bottom: 0.5rem; color: var(--dark-blue);">Ime i prezime</label>
+                        <input type="text" id="name" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label for="email" style="display: block; margin-bottom: 0.5rem; color: var(--dark-blue);">Email adresa</label>
+                        <input type="email" id="email" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label for="phone" style="display: block; margin-bottom: 0.5rem; color: var(--dark-blue);">Telefon</label>
+                        <input type="tel" id="phone" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+                    </div>
+                    <div style="margin-bottom: 1rem;">
+                        <label for="message" style="display: block; margin-bottom: 0.5rem; color: var(--dark-blue);">Poruka</label>
+                        <textarea id="message" rows="5" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+                    </div>
+                    <button type="submit" class="btn" style="border: none; cursor: pointer;">Pošaljite upit</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <svg class="footer-logo" viewBox="0 0 100 50" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 10 C30 5, 70 5, 80 10 L80 40 C70 45, 30 45, 20 40 Z" fill="#387dbf" />
+                        <path d="M30 15 C40 12, 60 12, 70 15 L70 35 C60 38, 40 38, 30 35 Z" fill="#ffffff" />
+                        <path d="M40 20 C45 18, 55 18, 60 20 L60 30 C55 32, 45 32, 40 30 Z" fill="#387dbf" />
+                        <text x="25" y="48" font-size="10" fill="#ffffff">ČISTI BAZENI</text>
+                    </svg>
+                    <p>Profesionalno održavanje i čišćenje bazena za privatne i javne objekte širom Srbije.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Brzi linkovi</h4>
+                    <ul>
+                        <li><a href="#usluge">Usluge</a></li>
+                        <li><a href="#zasto">Zašto čistiti bazen</a></li>
+                        <li><a href="#kontakt">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Kontakt informacije</h4>
+                    <ul>
+                        <li>Adresa: Vodena 123, Beograd</li>
+                        <li>Telefon: +381 11 123 4567</li>
+                        <li>Email: info@cistibazeni.rs</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 Čisti Bazeni. Sva prava zadržana.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

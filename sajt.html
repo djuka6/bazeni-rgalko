@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="sr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Čisti Bazeni - Profesionalno održavanje bazena</title>
+    <style>
+        :root {
+            --dark-blue: #191944;
+            --light-blue: #387dbf;
+            --white: #ffffff;
+            --light-gray: #f8f9fa;
+            --transition-duration: 0.8s;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            background-color: var(--white);
+            color: var(--dark-blue);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity var(--transition-duration) ease, transform var(--transition-duration) ease;
+        }
+        
+        .fade-in.appear {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .stagger-delay-1 {
+            transition-delay: 0.1s;
+        }
+        
+        .stagger-delay-2 {
+            transition-delay: 0.2s;
+        }
+        
+        .stagger-delay-3 {
+            transition-delay: 0.3s;
+        }
+        
+        .stagger-delay-4 {
+            transition-delay: 0.4s;
+        }
+        
+        header {
+            background-color: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            transition: transform 0.4s ease;
+        }
+        
+        header.hide {
+            transform: translateY(-100%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            height: 50px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 2.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark-blue);
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--light-blue);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .hero {
+            height: 100vh;
+            background: linear-gradient(to right, rgba(25, 25, 68, 0.85), rgba(56, 125, 191, 0.85)), url('/api/placeholder/1200/800') center/cover no-repeat fixed;
+            display: flex;
+            align-items: center;
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, transparent 30%, rgba(0, 0, 0, 0.1) 100%);
+        }
+        
+        .hero-content {
+            max-width: 800px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: var(--light-blue);
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(56, 125, 191, 0.3);
+            border: 2px solid transparent;
+        }
+        
+        .btn:hover {
+            background-color: var(--white);
+            color: var(--light-blue);
+            border-color: var(--light-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(56, 125, 191, 0.4);
+        }
+        
+        .btn:active {
+            transform: translateY(-1px);
+        }
+        
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--light-blue);
+        }
+        
+        .section-title p {
+            color: var(--light-blue);
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .service-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--light-blue);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .service-card h3 {
+            color: var(--dark-blue);
+            margin: 1.5rem 0;
+            font-size: 1.5rem;
+        }
+        
+        .service-icon {
+            font-size: 3.5rem;
+            color: var(--light-blue);
+            margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .service-card:hover .service-icon {
+            transform: translateY(-5px);
+        }
+        
+        .bg-light {
+            background-color: var(--light-gray);
+        }
+        
+        .reasons {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .reason-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+            transition: all 0.4s ease;
+            height: 100%;
+        }
+        
+        .reason-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .reason-card h3 {
+            color: var(--dark-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+        
+        .reason-card h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--light-blue);
+        }
+        
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 3rem;
+        }
+        
+        .contact-item {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem;
+            text-align: center;
+            width: 280px;
+            transition: all 0.4s ease;
+        }
+        
+        .contact-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .contact-icon {
+            font-size: 3rem;
+            color: var(--light-blue);
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transition: transform 0.3s ease;
+        }
+        
+        .contact-item:hover .contact-icon {
+            transform: scale(1.1);
+        }
+        
+        .contact-item h3 {
+            color: var(--dark-blue);
+            margin-bottom: 1rem;
+        }
+        
+        .contact-link {
+            color: var(--light-blue);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .contact-link:hover {
+            color: var(--dark-blue);
+        }
+        
+        footer {
+            background-color: var(--dark-blue);
+            color: var(--white);
+            padding: 4rem 0 2rem;
+            position: relative;
+        }
+        
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(to right, var(--light-blue), var(--dark-blue));
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-logo {
+            filter: brightness(0) invert(1);
+            height: 50px;
+            width: auto;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .footer-logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .footer-links h4 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            position: relative;
+            padding-bottom: 0.75rem;
+        }
+        
+        .footer-links h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: var(--light-blue);
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        .footer-links a:hover {
+            color: var(--light-blue);
+            padding-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* Hamburger meni */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 30px;
+            height: 20px;
+            cursor: pointer;
+            z-index: 200;
+        }
+        
+        .hamburger span {
+            display: block;
+            width: 100%;
+            height: 3px;
+            background-color: var(--dark-blue);
+            transition: all 0.3s ease;
+        }
+        
+        .hamburger.active span:nth-child(1) {
+            transform: translateY(8px) rotate(45deg);
+        }
+        
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .hamburger.active span:nth-child(3) {
+            transform: translateY(-8px) rotate(-45deg);
+        }
+        
+        .mobile-nav {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: var(--white);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            z-index: 150;
+            padding: 6rem 2rem 2rem;
+            transition: right 0.4s ease;
+            overflow-y: auto;
+        }
+        
+        .mobile-nav.active {
+            right: 0;
+        }
+        
+        .mobile-nav ul {
+            list-style: none;
+        }
+        
+        .mobile-nav li {
+            margin-bottom: 1.5rem;
+        }
+        
+        .mobile-nav a {
+            text-decoration: none;
+            color: var(--dark-blue);
+            font-size: 1.3rem;
+            font-weight: 500;
+            display: block;
+            padding: 0.5rem 0;
+            transition: color 0.3s ease;
+        }
+        
+        .mobile-nav a:hover {
+            color: var(--light-blue);
+        }
+        
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 100;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        
+        .overlay.active {
+            display: block;
+            opacity: 1;
+        }
+        
+        /* Galerija slika */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+        
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+            aspect-ratio: 16/9;
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.05);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+            color: var(--white);
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .hamburger {
+                display: flex;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .service-card, .reason-card, .contact-item {
+                padding: 1.5rem;
+            }
+            
+            .gallery {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1rem;
+            }
+            
+            section {
+                padding: 4rem 0;
+            }
+            
+            .container {
+                padding: 0 1.5rem;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero {
+                height: auto;
+                min-height: 100vh;
+                padding: 6rem 0 4rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                align-items: center;
+                gap: 1.5rem;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+            }
+            
+            .btn {
+                padding: 0.8rem 2rem;
+            }
+        }
+
+        /* Lista sa checkmark ikonama */
+        .features-list {
+            list-style: none;
+            margin: 0 0 1.5rem;
+            padding: 0;
+        }
+        
+        .features-list li {
+            position: relative;
+            padding-left: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        
+        .features-list li::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: var(--light-blue);
+            font-size: 1.5rem;
+        }
+
+        /* Animacija za wave efekat */
+        .wave {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg"><path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" fill="%23ffffff"></path></svg>');
+            background-size: 1200px 100px;
+        }
+
+        /* Floating animacija */
+        @keyframes float {
+            0% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+            100% {
+                transform: translateY(0px);
+            }
+        }
+        
+        .float {
+            animation: float 4s ease-in-out infinite;
+        }
+    </style>
+</head>
+<body>
+    <header id="header">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo-container">
+                    <img src="./logo.svg" alt="Čisti Bazeni Logo" class="logo">
+                </a>
+                <ul class="nav-links">
+                    <li><a href="#usluge">Usluge</a></li>
+                    <li><a href="#zasto">Zašto nas</a></li>
+                    <li><a href="#galerija">Galerija</a></li>
+                    <li><a href="#kontakt">Kontakt</a></li>
+                </ul>
+                <div class="hamburger" id="hamburger-menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1>Dobrodošli na "Pool Maintenance Novi Sad"</h1>
+                <p>Da li želite kristalno čistu vodu u svom bazenu bez brige o održavanju? Mi smo ovde da vam pomognemo! Naša stručna ekipa pruža usluge profesionalnog čišćenja i održavanja bazena kako biste uživali u savršenoj vodi tokom cele godine.</p>
+                <a href="#kontakt" class="btn">Kontaktirajte nas</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="usluge">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Šta nudimo?</h2>
+                <p>Kompletna rešenja za održavanje bazena</p>
+            </div>
+            <div class="services">
+                <div class="service-card fade-in stagger-delay-1">
+                    <div class="service-icon float">🧹</div>
+                    <h3>Kompletno čišćenje bazena</h3>
+                    <p>Od uklanjanja nečistoća do tretmana vode. Koristimo najsavremeniju opremu za usisavanje i čišćenje zidova i dna vašeg bazena.</p>
+                </div>
+                <div class="service-card fade-in stagger-delay-2">
+                    <div class="service-icon float">🧪</div>
+                    <h3>Održavanje kvaliteta vode</h3>
+                    <p>Merenje i balansiranje pH vrednosti, hlora i drugih hemikalija. Stručno doziranje za kristalno čistu vodu bez štetnih mikroorganizama.</p>
+                </div>
+                <div class="service-card fade-in stagger-delay-3">
+                    <div class="service-icon float">⚙️</div>
+                    <h3>Popravke i zamena opreme</h3>
+                    <p>Filteri, pumpe, i ostala oprema. Redovan pregled i održavanje sistema za cirkulaciju vode, pravovremene popravke i zamena delova.</p>
+                </div>
+                <div class="service-card fade-in stagger-delay-4">
+                    <div class="service-icon float">🌊</div>
+                    <h3>Sezonska priprema bazena</h3>
+                    <p>Priprema za letnju sezonu ili zimsko konzerviranje. Kompletna usluga pripreme vašeg bazena za korišćenje ili zaštita tokom zimskih meseci.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="zasto" class="bg-light">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Zašto odabrati nas?</h2>
+                <p>Prepustite održavanje bazena profesionalcima i uživajte u svom bazenu bez stresa!</p>
+            </div>
+            <div class="reasons">
+                <div class="reason-card fade-in stagger-delay-1">
+                    <h3>Iskusni i profesionalni tim</h3>
+                    <p>Naš tim čine iskusni stručnjaci sa dugogodišnjim iskustvom u održavanju bazena različitih veličina i tipova. Svaki član tima prošao je specijalizovanu obuku i poseduje sertifikate koji potvrđuju njihovu stručnost.</p>
+                </div>
+                <div class="reason-card fade-in stagger-delay-2">
+                    <h3>Kvalitetni proizvodi i oprema</h3>
+                    <p>Koristimo samo proverene i sertifikovane proizvode za tretman vode i najsavremeniju opremu za čišćenje i održavanje. Svi proizvodi koje koristimo su ekološki prihvatljivi i bezbedni za korisnike.</p>
+                </div>
+                <div class="reason-card fade-in stagger-delay-3">
+                    <h3>Brza i pouzdana usluga</h3>
+                    <p>Znamo koliko je važno da vaš bazen bude uvek spreman za korišćenje. Zato garantujemo brzu i efikasnu uslugu prilagođenu vašim potrebama i rasporedu. Dostupni smo za redovno održavanje ali i za hitne intervencije.</p>
+                </div>
+                <div class="reason-card fade-in stagger-delay-4">
+                    <h3>Transparentne cene</h3>
+                    <p>Verujemo u potpunu transparentnost kada su u pitanju naše usluge i cene. Nema skrivenih troškova ni neprijatnih iznenađenja. Pre početka saradnje dobićete detaljnu ponudu sa jasno navedenim cenama svih usluga.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="galerija" class="bg-light">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Galerija</h2>
+                <p>Pogledajte naše prethodne projekte</p>
+            </div>
+            <div class="gallery">
+                <div class="gallery-item fade-in stagger-delay-1">
+                    <img src="./image00001.jpeg" alt="Čišćenje bazena">
+                    <div class="gallery-caption">
+                        <h3>Mehaničko čišćenje bazena</h3>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in stagger-delay-2">
+                    <img src="./image00002.jpeg" alt="Hemijski tretman vode">
+                    <div class="gallery-caption">
+                        <h3>Hemijski tretman vode</h3>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in stagger-delay-3">
+                    <img src="./image00003.jpeg" alt="Održavanje opreme">
+                    <div class="gallery-caption">
+                        <h3>Servis opreme za bazen</h3>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in stagger-delay-4">
+                    <img src="./image00004.jpeg" alt="Čist bazen">
+                    <div class="gallery-caption">
+                        <h3>Rezultat našeg rada</h3>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in stagger-delay-1">
+                    <img src="./image00005.jpeg" alt="Luksuzni bazen">
+                    <div class="gallery-caption">
+                        <h3>Priprema za sezonu</h3>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in stagger-delay-2">
+                    <img src="./image00007.jpeg" alt="Popravka bazena">
+                    <div class="gallery-caption">
+                        <h3>Popravka oštećenja</h3>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in stagger-delay-2">
+                    <img src="./image00008.jpeg" alt="Popravka bazena">
+                    <div class="gallery-caption">
+                        <h3>Popravka oštećenja</h3>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in stagger-delay-2">
+                    <img src="./image00010.jpeg" alt="Popravka bazena">
+                    <div class="gallery-caption">
+                        <h3>Popravka oštećenja</h3>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in stagger-delay-2">
+                    <img src="./image00011.jpeg" alt="Popravka bazena">
+                    <div class="gallery-caption">
+                        <h3>Popravka oštećenja</h3>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in stagger-delay-2">
+                    <img src="./image00012.jpeg" alt="Popravka bazena">
+                    <div class="gallery-caption">
+                        <h3>Popravka oštećenja</h3>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in stagger-delay-2">
+                    <img src="./image00013.jpeg" alt="Popravka bazena">
+                    <div class="gallery-caption">
+                        <h3>Popravka oštećenja</h3>
+                    </div>
+                </div>
+                <div class="gallery-item fade-in stagger-delay-2">
+                    <img src="./image00014.jpeg" alt="Popravka bazena">
+                    <div class="gallery-caption">
+                        <h3>Popravka oštećenja</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="kontakt">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Kontaktirajte nas</h2>
+                <p>Zakažite termin već danas</p>
+            </div>
+            <div class="contact-info">
+                <div class="contact-item fade-in stagger-delay-1">
+                    <div class="contact-icon float">📱</div>
+                    <h3>Telefon</h3>
+                    <a href="tel:+381603291019" class="contact-link">+381 11 123 4567</a>
+                </div>
+                <div class="contact-item fade-in stagger-delay-2">
+                    <div class="contact-icon float">📸</div>
+                    <h3>Instagram</h3>
+                    <a href="https://www.instagram.com/robert.galko/" target="_blank" class="contact-link">@robert.galko</a>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;" class="fade-in stagger-delay-3">
+                <a href="tel:+381111234567" class="btn">Pozovite nas</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="fade-in">
+                    <p>Profesionalno održavanje i čišćenje bazena za privatne i javne objekte širom Srbije. Prepustite održavanje bazena profesionalcima i uživajte u svom bazenu bez stresa!</p>
+                </div>
+                <div class="footer-links fade-in stagger-delay-1">
+                    <h4>Brzi linkovi</h4>
+                    <ul>
+                        <li><a href="#usluge">Usluge</a></li>
+                        <li><a href="#zasto">Zašto nas</a></li>
+                        <li><a href="#galerija">Galerija</a></li>
+                        <li><a href="#kontakt">Kontakt</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links fade-in stagger-delay-2">
+                    <h4>Kontakt informacije</h4>
+                    <ul>
+                        <li>Adresa: Mornarska 11, Novi Sad</li>
+                        <li>Telefon: <a href="tel:+381111234567" style="color: inherit;">+381 11 123 4567</a></li>
+                        <li>Instagram: <a href="https://www.instagram.com/robert.galko/" target="_blank" style="color: inherit;">@robert.galko</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright fade-in">
+                <p>&copy; 2025 Čisti Bazeni. Sva prava zadržana.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Navigation -->
+    <div class="overlay" id="overlay"></div>
+    <div class="mobile-nav" id="mobile-nav">
+        <ul>
+            <li><a href="#" class="mobile-link">Početna</a></li>
+            <li><a href="#usluge" class="mobile-link">Usluge</a></li>
+            <li><a href="#zasto" class="mobile-link">Zašto nas</a></li>
+            <li><a href="#galerija" class="mobile-link">Galerija</a></li>
+            <li><a href="#kontakt" class="mobile-link">Kontakt</a></li>
+        </ul>
+    </div>
+
+    <script>
+        // Fade-in animacija pri skrolanju
+        document.addEventListener('DOMContentLoaded', function() {
+            // Odma aktiviraj hero animaciju
+            setTimeout(() => {
+                document.querySelector('.hero-content').classList.add('appear');
+            }, 300);
+            
+            // Observer za fade-in animacije
+            const fadeElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('appear');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.15
+            });
+            
+            fadeElements.forEach(element => {
+                observer.observe(element);
+            });
+            
+            // Sakrij/prikaži header pri skrolanju
+            let lastScrollY = window.scrollY;
+            
+            window.addEventListener('scroll', () => {
+                const header = document.getElementById('header');
+                
+                if (window.scrollY > lastScrollY) {
+                    // Skrolovanje nadole
+                    header.classList.add('hide');
+                } else {
+                    // Skrolovanje nagore
+                    header.classList.remove('hide');
+                }
+                
+                lastScrollY = window.scrollY;
+            });
+            
+            // Hamburger menu functionality
+            const hamburger = document.getElementById('hamburger-menu');
+            const mobileNav = document.getElementById('mobile-nav');
+            const overlay = document.getElementById('overlay');
+            const mobileLinks = document.querySelectorAll('.mobile-link');
+            
+            function toggleMenu() {
+                hamburger.classList.toggle('active');
+                mobileNav.classList.toggle('active');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : '';
+            }
+            
+            hamburger.addEventListener('click', toggleMenu);
+            overlay.addEventListener('click', toggleMenu);
+            
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', toggleMenu);
+            });
+            
+            // Proverimo širinu ekrana i podesimo vidljivost navigacije
+            function checkScreenSize() {
+                if (window.innerWidth > 768) {
+                    hamburger.classList.remove('active');
+                    mobileNav.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            }
+            
+            window.addEventListener('resize', checkScreenSize);
+        });
+    </script>
+</body>
+</html>
