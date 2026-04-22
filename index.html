@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Čisti Bazeni - Profesionalno održavanje bazena</title>
+    <link rel="icon" type="image/png" href="favicon.png">
     <style>
         :root {
             --dark-blue: #191944;
@@ -156,12 +157,19 @@
         
         .hero {
             height: 100vh;
-            background: linear-gradient(to right, rgba(25, 25, 68, 0.85), rgba(56, 125, 191, 0.85)), url('/api/placeholder/1200/800') center/cover no-repeat fixed;
+            background: linear-gradient(to right, rgba(25, 25, 68, 0.55), rgba(56, 125, 191, 0.55)), url('image00011.jpeg') center/cover no-repeat;
+            background-attachment: scroll;
             display: flex;
             align-items: center;
             color: var(--white);
             position: relative;
             overflow: hidden;
+        }
+
+        @media (min-width: 769px) {
+            .hero {
+                background-attachment: fixed;
+            }
         }
         
         .hero::before {
@@ -316,7 +324,564 @@
         .bg-light {
             background-color: var(--light-gray);
         }
-        
+
+        .pricing-intro {
+            max-width: 780px;
+            margin: 0 auto 3.5rem;
+            text-align: center;
+            color: var(--dark-blue);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .pricing-intro .single-price {
+            display: inline-block;
+            margin-top: 1rem;
+            padding: 0.5rem 1.25rem;
+            background-color: rgba(56, 125, 191, 0.1);
+            color: var(--dark-blue);
+            border-radius: 50px;
+            font-weight: 500;
+        }
+
+        .pricing-intro .single-price b {
+            color: var(--light-blue);
+        }
+
+        .pricing {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+            align-items: stretch;
+        }
+
+        .pricing-card {
+            background-color: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05);
+            padding: 2.5rem 2rem;
+            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            overflow: hidden;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .pricing-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background-color: var(--light-blue);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .pricing-card:hover,
+        .pricing-card.active {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .pricing-card:hover::before,
+        .pricing-card.active::before {
+            transform: scaleX(1);
+        }.pricing-card.featured {
+            background: linear-gradient(160deg, var(--dark-blue), var(--light-blue));
+            color: var(--white);
+            box-shadow: 0 15px 35px rgba(25, 25, 68, 0.25);
+        }
+
+        .pricing-card.featured::before {
+            display: none;
+        }
+
+        .pricing-card.gold {
+            background: linear-gradient(160deg, #4a3410, #c9a227);
+            color: var(--white);
+            box-shadow: 0 15px 35px rgba(74, 52, 16, 0.25);
+        }
+
+        .pricing-card.vip {
+            background: linear-gradient(160deg, #2a0d5e, #7e3ff2);
+            color: var(--white);
+            box-shadow: 0 15px 35px rgba(42, 13, 94, 0.25);
+        }
+
+        .pricing-card.gold::before,
+        .pricing-card.vip::before {
+            display: none;
+        }
+
+        .pricing-card.gold h3,
+        .pricing-card.vip h3 {
+            color: var(--white);
+        }
+
+        .pricing-card.gold .price,
+        .pricing-card.vip .price {
+            border-bottom-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .pricing-card.gold .price .amount,
+        .pricing-card.vip .price .amount {
+            color: var(--white);
+        }
+
+        .pricing-card.gold .price .unit,
+        .pricing-card.vip .price .unit {
+            color: var(--white);
+            opacity: 0.85;
+        }
+
+        .pricing-card.gold .pricing-features li::before,
+        .pricing-card.vip .pricing-features li::before {
+            color: var(--white);
+        }
+
+        .pricing-card.gold:hover,
+        .pricing-card.gold.active {
+            box-shadow: 0 20px 40px rgba(74, 52, 16, 0.3);
+        }
+
+        .pricing-card.vip:hover,
+        .pricing-card.vip.active {
+            box-shadow: 0 20px 40px rgba(42, 13, 94, 0.3);
+        }
+
+        .pricing-card.featured:hover,
+        .pricing-card.featured.active {
+            box-shadow: 0 20px 40px rgba(25, 25, 68, 0.3);
+        }
+
+        .pricing-badge {
+            display: none;
+        }
+
+        .pricing-card h3 {
+            font-size: 2rem;
+            letter-spacing: 4px;
+            margin: 0 0 1.5rem;
+            color: var(--dark-blue);
+        }
+
+        .pricing-card.featured h3 {
+            color: var(--white);
+        }
+
+        .pricing-details {
+            display: grid;
+            grid-template-rows: 0fr;
+            opacity: 0;
+            transition: grid-template-rows 0.5s ease, opacity 0.4s ease;
+        }
+
+        .pricing-details-inner {
+            overflow: hidden;
+            min-height: 0;
+        }
+
+        .pricing.all-active .pricing-card .pricing-details,
+        .pricing-card.active .pricing-details {
+            grid-template-rows: 1fr;
+            opacity: 1;
+        }
+
+        .price {
+            display: flex;
+            align-items: baseline;
+            justify-content: center;
+            gap: 0.4rem;
+            margin-bottom: 1.75rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(56, 125, 191, 0.15);
+        }
+
+        .pricing-card.featured .price {
+            border-bottom-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .price .amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--light-blue);
+        }
+
+        .pricing-card.featured .price .amount {
+            color: var(--white);
+        }
+
+        .price .unit {
+            font-size: 0.95rem;
+            color: var(--dark-blue);
+            opacity: 0.75;
+        }
+
+        .pricing-card.featured .price .unit {
+            color: var(--white);
+            opacity: 0.85;
+        }
+
+        .pricing-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2rem;
+            text-align: left;
+            flex-grow: 1;
+        }
+
+        .pricing-features li {
+            padding: 0.6rem 0 0.6rem 1.75rem;
+            position: relative;
+            line-height: 1.5;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0.55rem;
+            color: var(--light-blue);
+            font-weight: 700;
+        }
+
+        .pricing-card.featured .pricing-features li::before {
+            color: var(--white);
+        }
+
+        .pricing-card .btn {
+            align-self: center;
+            margin-top: auto;
+        }
+
+        .pricing-card.featured .btn {
+            background-color: var(--white);
+            color: var(--light-blue);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+        }
+
+        .pricing-card.featured .btn:hover {
+            background-color: transparent;
+            color: var(--white);
+            border-color: var(--white);
+        }
+
+        .pricing-note {
+            text-align: center;
+            margin-top: 2.5rem;
+            color: var(--dark-blue);
+            opacity: 0.75;
+            font-size: 0.95rem;
+        }
+
+        .ebook-wrapper {
+            display: grid;
+            grid-template-columns: minmax(260px, 400px) 1fr;
+            gap: 4rem;
+            align-items: center;
+            background: linear-gradient(160deg, var(--dark-blue), var(--light-blue));
+            border-radius: 20px;
+            padding: 4rem;
+            color: var(--white);
+            box-shadow: 0 20px 50px rgba(25, 25, 68, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .ebook-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -80px;
+            right: -80px;
+            width: 260px;
+            height: 260px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .ebook-wrapper::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .ebook-cover {
+            position: relative;
+            z-index: 1;
+            transition: transform 0.5s ease;
+        }
+
+        .ebook-cover img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 10px;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            transform: perspective(1000px) rotateY(-8deg);
+            transition: transform 0.5s ease;
+        }
+
+        .ebook-wrapper:hover .ebook-cover img {
+            transform: perspective(1000px) rotateY(0deg);
+        }
+
+        .ebook-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 1.25rem;
+            backdrop-filter: blur(4px);
+        }
+
+        .ebook-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .ebook-content h3 {
+            font-size: 2.5rem;
+            line-height: 1.15;
+            margin-bottom: 1rem;
+            letter-spacing: -0.5px;
+        }
+
+        .ebook-subtitle {
+            font-size: 1.15rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .ebook-features {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 2.25rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 0.75rem 1.5rem;
+        }
+
+        .ebook-features li {
+            position: relative;
+            padding-left: 1.75rem;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .ebook-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            top: 0;
+            color: var(--white);
+            background: rgba(255, 255, 255, 0.2);
+            width: 1.25rem;
+            height: 1.25rem;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        .ebook-cta {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .ebook-price {
+            display: flex;
+            flex-direction: column;
+            line-height: 1;
+        }
+
+        .ebook-price .amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .ebook-price .unit {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            margin-top: 0.35rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .ebook-wrapper .btn {
+            background-color: var(--white);
+            color: var(--dark-blue);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .ebook-wrapper .btn:hover {
+            background-color: transparent;
+            color: var(--white);
+            border-color: var(--white);
+        }
+
+        @media (max-width: 1200px) {
+            .ebook-wrapper {
+                padding: 3.5rem 3rem;
+                gap: 3rem;
+            }
+
+            .ebook-content h3 {
+                font-size: 2.2rem;
+            }
+
+            .ebook-features {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 0.6rem 1.25rem;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .ebook-wrapper {
+                grid-template-columns: 1fr;
+                padding: 3rem 2.5rem;
+                gap: 2.5rem;
+                text-align: center;
+            }
+
+            .ebook-cover {
+                max-width: 420px;
+                width: 100%;
+                margin: 0 auto;
+            }
+
+            .ebook-cover img {
+                transform: perspective(1000px) rotateY(0deg);
+            }
+
+            .ebook-subtitle {
+                display: none;
+            }
+
+            .ebook-features li:nth-child(n+4) {
+                display: none;
+            }
+
+            .ebook-features {
+                text-align: left;
+                max-width: 520px;
+                margin: 0 auto 2rem;
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+            }
+
+            .ebook-content h3 {
+                font-size: 1.8rem;
+            }
+
+            .ebook-cta {
+                justify-content: center;
+                gap: 1.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .ebook-wrapper {
+                padding: 2.5rem 1.75rem;
+                border-radius: 15px;
+                gap: 2rem;
+            }
+
+            .ebook-wrapper::before {
+                width: 180px;
+                height: 180px;
+                top: -60px;
+                right: -60px;
+            }
+
+            .ebook-wrapper::after {
+                width: 200px;
+                height: 200px;
+                bottom: -70px;
+                left: -70px;
+            }
+
+            .ebook-cover {
+                max-width: 340px;
+            }
+
+            .ebook-badge {
+                font-size: 0.65rem;
+                letter-spacing: 1.5px;
+                padding: 0.35rem 0.85rem;
+            }
+
+            .ebook-content h3 {
+                font-size: 1.5rem;
+                line-height: 1.2;
+            }
+
+            .ebook-features li {
+                font-size: 0.9rem;
+                padding-left: 1.6rem;
+            }
+
+            .ebook-cta {
+                flex-direction: column;
+                gap: 1.25rem;
+                align-items: center;
+            }
+
+            .ebook-price {
+                align-items: center;
+                text-align: center;
+            }
+
+            .ebook-price .amount {
+                font-size: 2rem;
+            }
+
+            .ebook-price .unit {
+                font-size: 0.75rem;
+            }
+
+            .ebook-wrapper .btn {
+                width: 100%;
+                max-width: 280px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .ebook-wrapper {
+                padding: 2rem 1.25rem;
+            }
+
+            .ebook-content h3 {
+                font-size: 1.35rem;
+                letter-spacing: 0;
+            }
+
+            .ebook-cover {
+                max-width: 260px;
+            }
+        }
+
         .reasons {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -360,6 +925,34 @@
             justify-content: center;
             flex-wrap: wrap;
             gap: 3rem;
+        }
+
+        @media (min-width: 481px) and (max-width: 1024px) {
+            .contact-info {
+                gap: 1rem;
+                flex-wrap: nowrap;
+            }
+
+            .contact-item {
+                width: auto;
+                flex: 1 1 0;
+                min-width: 0;
+                padding: 1.75rem 1rem;
+            }
+
+            .contact-item h3 {
+                font-size: 1.1rem;
+            }
+
+            .contact-link {
+                font-size: 1rem;
+                word-break: break-word;
+            }
+
+            .hours-list li {
+                font-size: 0.9rem;
+                gap: 0.5rem;
+            }
         }
         
         .contact-item {
@@ -405,7 +998,40 @@
         .contact-link:hover {
             color: var(--dark-blue);
         }
-        
+
+        .hours-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+            display: inline-block;
+        }
+
+        .hours-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(56, 125, 191, 0.15);
+            font-size: 1rem;
+        }
+
+        .hours-list li:last-child {
+            border-bottom: none;
+        }
+
+        .hours-list .day {
+            color: var(--dark-blue);
+            font-weight: 500;
+        }
+
+        .hours-list .time {
+            color: var(--light-blue);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
         footer {
             background-color: var(--dark-blue);
             color: var(--white);
@@ -649,7 +1275,84 @@
             .service-card, .reason-card, .contact-item {
                 padding: 1.5rem;
             }
-            
+
+            .pricing {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.6rem;
+            }
+
+            .pricing-card {
+                padding: 1.25rem 0.75rem;
+            }
+
+            .pricing-card.featured,
+            .pricing-card.featured:hover {
+                transform: none;
+            }
+
+            .pricing-card:hover,
+            .pricing-card.active {
+                transform: none;
+            }
+
+            .pricing-badge {
+                top: 0.5rem;
+                right: 0.5rem;
+                font-size: 0.55rem;
+                letter-spacing: 0.5px;
+                padding: 0.2rem 0.45rem;
+            }
+
+            .pricing-card h3 {
+                font-size: 1.1rem;
+                letter-spacing: 1.5px;
+                margin-bottom: 0.75rem;
+                text-align: center;
+            }
+
+            .price {
+                flex-direction: column;
+                gap: 0.1rem;
+                margin-bottom: 1rem;
+                padding-bottom: 0.85rem;
+            }
+
+            .price .amount {
+                font-size: 1.35rem;
+            }
+
+            .price .unit {
+                font-size: 0.7rem;
+                text-align: center;
+            }
+
+            .pricing-features {
+                margin-bottom: 1rem;
+                font-size: 0.8rem;
+            }
+
+            .pricing-features li {
+                padding: 0.35rem 0 0.35rem 1.1rem;
+                line-height: 1.35;
+            }
+
+            .pricing-features li::before {
+                top: 0.35rem;
+                font-size: 0.8rem;
+            }
+
+            .pricing-card .btn {
+                padding: 0.55rem 0.9rem;
+                font-size: 0.75rem;
+                width: 100%;
+                text-align: center;
+            }
+
+            .pricing-intro {
+                font-size: 0.95rem;
+                margin-bottom: 2.5rem;
+            }
+
             .gallery {
                 grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
                 gap: 1rem;
@@ -688,6 +1391,49 @@
             
             .gallery {
                 grid-template-columns: 1fr;
+            }
+
+            .pricing {
+                gap: 0.4rem;
+            }
+
+            .pricing-card {
+                padding: 1rem 0.5rem;
+            }
+
+            .pricing-card h3 {
+                font-size: 0.95rem;
+                letter-spacing: 1px;
+            }
+
+            .price .amount {
+                font-size: 1.15rem;
+            }
+
+            .price .unit {
+                font-size: 0.6rem;
+            }
+
+            .pricing-features {
+                font-size: 0.72rem;
+            }
+
+            .pricing-features li {
+                padding: 0.3rem 0 0.3rem 0.9rem;
+            }
+
+            .pricing-card .btn {
+                padding: 0.45rem 0.5rem;
+                font-size: 0.65rem;
+            }
+
+            .pricing-badge {
+                font-size: 0.45rem;
+                padding: 0.15rem 0.35rem;
+            }
+
+            .container {
+                padding: 0 1rem;
             }
             
             .btn {
@@ -756,6 +1502,8 @@
                 <ul class="nav-links">
                     <li><a href="#usluge">Usluge</a></li>
                     <li><a href="#zasto">Zašto nas</a></li>
+                    <li><a href="#paketi">Paketi</a></li>
+                    <li><a href="#e-knjiga">E-knjiga</a></li>
                     <li><a href="#galerija">Galerija</a></li>
                     <li><a href="#kontakt">Kontakt</a></li>
                 </ul>
@@ -831,6 +1579,109 @@
                 <div class="reason-card fade-in stagger-delay-4">
                     <h3>Transparentne cene</h3>
                     <p><b>Cena naših usluga</b> čišćenja zavisi od veličine bazena i udaljenosti lokacije. Da bismo vam dali tačnu ponudu, kontaktirajte nas putem telefona ili poruke. Rado ćemo vam pružiti sve potrebne informacije!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="paketi">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Paketi održavanja</h2>
+                <p>Izaberite nivo održavanja koji najbolje odgovara vašem bazenu</p>
+            </div>
+            <div class="pricing-intro fade-in">
+                <p>Svaki bazen je priča za sebe – neki zahtevaju tek redovno osvežavanje vode, drugi punu pažnju i detaljno održavanje tokom cele sezone. Zato smo pripremili tri jasno definisana mesečna paketa, kako biste lako odabrali onaj koji najviše odgovara vašim potrebama, veličini bazena i načinu korišćenja.</p>
+                <span class="single-price">Jednokratno čišćenje: <b>4.000 din</b></span>
+            </div>
+            <div class="pricing">
+                <div class="pricing-card gold fade-in stagger-delay-1">
+                    <h3>GOLD</h3>
+                    <div class="pricing-details">
+                        <div class="pricing-details-inner">
+                            <div class="price">
+                                <span class="amount">9.000</span>
+                                <span class="unit">din / mesečno</span>
+                            </div>
+                            <ul class="pricing-features">
+                                <li>2 izlaska na teren mesečno</li>
+                                <li>Čišćenje bazena</li>
+                                <li>Sređivanje vode</li>
+                                <li>Osnovno održavanje</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing-card featured fade-in stagger-delay-2">
+                    <h3>PLATINUM</h3>
+                    <div class="pricing-details">
+                        <div class="pricing-details-inner">
+                            <div class="price">
+                                <span class="amount">11.500</span>
+                                <span class="unit">din / mesečno</span>
+                            </div>
+                            <ul class="pricing-features">
+                                <li>3 izlaska na teren mesečno</li>
+                                <li>Detaljnije čišćenje bazena</li>
+                                <li>Sređivanje vode</li>
+                                <li>Redovna kontrola bazena i opreme</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="pricing-card vip fade-in stagger-delay-3">
+                    <h3>VIP</h3>
+                    <div class="pricing-details">
+                        <div class="pricing-details-inner">
+                            <div class="price">
+                                <span class="amount">17.500</span>
+                                <span class="unit">din / mesečno</span>
+                            </div>
+                            <ul class="pricing-features">
+                                <li>4 do 5 izlazaka na teren mesečno</li>
+                                <li>Čišćenje bazena</li>
+                                <li>Sređivanje vode</li>
+                                <li>Poliranje bazena</li>
+                                <li>Premium održavanje</li>
+                                <li>Prioritetan termin</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p class="pricing-note fade-in">Niste sigurni koji paket je pravi za vas? Pozovite nas – zajedno ćemo pronaći rešenje prilagođeno vašem bazenu.</p>
+        </div>
+    </section>
+
+    <section id="e-knjiga" class="bg-light">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Naša E-knjiga</h2>
+                <p>Praktičan vodič za svakog vlasnika bazena</p>
+            </div>
+            <div class="ebook-wrapper fade-in">
+                <div class="ebook-cover">
+                    <img src="e-book-cov.png" alt="E-knjiga: Bazen pod kontrolom">
+                </div>
+                <div class="ebook-content">
+                    <span class="ebook-badge">Novo • Digitalno izdanje</span>
+                    <h3>Bazen pod kontrolom – Vodič za čistu vodu cele sezone</h3>
+                    <p class="ebook-subtitle">Sve što smo naučili godinama radeći na terenu, sažeto u jedan jasan i praktičan vodič. Namenjen vlasnicima bazena koji žele da sami održavaju svoj bazen – bez nepotrebnih troškova i pogrešnih koraka.</p>
+                    <ul class="ebook-features">
+                        <li>Sami očistite bazen korak po korak</li>
+                        <li>Održavajte kvalitet vode tokom cele sezone</li>
+                        <li>Naučite osnovnu hemiju vode na jednostavan način</li>
+                        <li>Prepoznajte najčešće probleme na vreme</li>
+                        <li>Izbegnite skupe greške i nepotrebne popravke</li>
+                        <li>Saveti iz prakse, bez komplikošanja</li>
+                    </ul>
+                    <div class="ebook-cta">
+                        <div class="ebook-price">
+                            <span class="amount">2.500 din</span>
+                            <span class="unit">Jednokratna kupovina</span>
+                        </div>
+                        <a href="#kontakt" class="btn">Poruči e-knjigu</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -940,6 +1791,15 @@
                     <h3>Instagram</h3>
                     <a href="https://www.instagram.com/pool.cleaning.service/" target="_blank" class="contact-link">@pool.cleaning.service</a>
                 </div>
+                <div class="contact-item fade-in stagger-delay-3">
+                    <div class="contact-icon float">🕒</div>
+                    <h3>Radno vreme</h3>
+                    <ul class="hours-list">
+                        <li><span class="day">Pon – Pet</span><span class="time">09:00 – 19:00</span></li>
+                        <li><span class="day">Subota</span><span class="time">10:00 – 16:00</span></li>
+                        <li><span class="day">Nedelja</span><span class="time">11:00 – 14:00</span></li>
+                    </ul>
+                </div>
             </div>
             <div style="text-align: center; margin-top: 3rem;" class="fade-in stagger-delay-3">
                 <a href="tel:+381603291019" class="btn">Pozovite nas</a>
@@ -958,6 +1818,7 @@
                     <ul>
                         <li><a href="#usluge">Usluge</a></li>
                         <li><a href="#zasto">Zašto nas</a></li>
+                        <li><a href="#e-knjiga">E-knjiga</a></li>
                         <li><a href="#galerija">Galerija</a></li>
                         <li><a href="#kontakt">Kontakt</a></li>
                     </ul>
@@ -965,7 +1826,6 @@
                 <div class="footer-links fade-in stagger-delay-2">
                     <h4>Kontakt informacije</h4>
                     <ul>
-                        <li>Adresa: Mornarska 11, Novi Sad</li>
                         <li>Telefon: <a href="tel:+381603291019" style="color: inherit;">+381 60 329 1019</a></li>
                         <li>Instagram: <a href="https://www.instagram.com/robert.galko/" target="_blank" style="color: inherit;">@pool.cleaning.service</a></li>
                     </ul>
@@ -984,6 +1844,7 @@
             <li><a href="#" class="mobile-link">Početna</a></li>
             <li><a href="#usluge" class="mobile-link">Usluge</a></li>
             <li><a href="#zasto" class="mobile-link">Zašto nas</a></li>
+            <li><a href="#e-knjiga" class="mobile-link">E-knjiga</a></li>
             <li><a href="#galerija" class="mobile-link">Galerija</a></li>
             <li><a href="#kontakt" class="mobile-link">Kontakt</a></li>
         </ul>
@@ -1012,6 +1873,23 @@
             setTimeout(() => {
                 document.querySelector('.hero-content').classList.add('appear');
             }, 300);
+
+            // Pricing kartice – klik za otvaranje/zatvaranje (radi i na mobilnom)
+            const pricingCards = document.querySelectorAll('.pricing-card');
+            const pricingWrapper = document.querySelector('.pricing');
+            pricingCards.forEach(card => {
+                card.addEventListener('click', (e) => {
+                    const isOpen = pricingWrapper.classList.contains('all-active');
+                    pricingWrapper.classList.toggle('all-active', !isOpen);
+                    pricingCards.forEach(c => c.classList.toggle('active', !isOpen));
+                });
+            });
+            document.addEventListener('click', (e) => {
+                if (!e.target.closest('.pricing-card')) {
+                    pricingWrapper?.classList.remove('all-active');
+                    pricingCards.forEach(c => c.classList.remove('active'));
+                }
+            });
             
             // Observer za fade-in animacije
             const fadeElements = document.querySelectorAll('.fade-in');
